@@ -2,7 +2,7 @@
 // import "./App.css";
 
 import { Navigate, Route, Routes } from "react-router-dom";
-import { Layout } from "./components/Layout";
+import { Layout } from "./components/Layuot/Layout";
 import HomePage from "./pages/Home/Home";
 import CatalogPage from "./pages/Catalog/Catalog";
 import FavoritesPage from "./pages/Favorites/Favorites";

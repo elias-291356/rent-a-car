@@ -5,7 +5,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const carSlice = createSlice({
   name: 'cars',
   initialState: {
-    items: [],
+    carItems: [],
     isLoading: false,
     error: null,
   },
@@ -15,7 +15,7 @@ const carSlice = createSlice({
     })
     .addCase(fetchCars.fulfilled, (state, { payload }) => {
       state.isLoading = false;
-      state.items = payload
+      state.carItems = payload
       state.error = null;
     })
     .addCase(fetchCars.rejected, (state, { payload }) => {
