@@ -4,7 +4,6 @@ export const ContainerFilter = styled.div`
   justify-content:center;
   padding-bottom:50px;
   padding-top: 50px;
-  background-color: rgba(139, 165, 162, 0.49);
 `
 export const Form = styled.form`
   display:flex;
@@ -34,6 +33,7 @@ line-height: 1.13;
 border-radius: 14px;
 background: #F7F7FB;
 border: none;
+outline:none;
 
 
 ;
@@ -54,7 +54,12 @@ color: #121417;
 
 
 export const Label = styled.label`
-  /* margin-bottom: 5px;  */
+color: #8A8A89;
+font-family: Manrope;
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: 18px;
 `
 // export const SelectStyle = styled.select`
 //   color: #121417;
@@ -74,6 +79,7 @@ export const BtnFilter = styled.button`
   padding:0;
 background: #3470FF;
 border:none;
+
 color:white;
 
 `

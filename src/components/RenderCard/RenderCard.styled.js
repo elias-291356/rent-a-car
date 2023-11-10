@@ -3,7 +3,7 @@ export const Container = styled.div`
   width: 1183px;
    margin-right: auto;
    margin-left: auto;
-
+padding-bottom:150px;
   background-color: #555455;
   
 `

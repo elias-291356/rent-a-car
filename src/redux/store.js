@@ -1,9 +1,7 @@
-
-import carReducer from './carSlice'
-import { configureStore } from '@reduxjs/toolkit'
+import carReducer from './carSlice';
+import { configureStore } from '@reduxjs/toolkit';
 
 import {
-  // persistStore,
   FLUSH,
   REHYDRATE,
   PAUSE,
@@ -12,14 +10,11 @@ import {
   REGISTER,
 } from 'redux-persist';
 
-
-
 export const store = configureStore({
   reducer: {
     cars: carReducer,
-
   },
-  middleware: getDefaultMiddleware =>
+  middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],

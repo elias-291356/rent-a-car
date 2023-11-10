@@ -1,6 +1,6 @@
 
-import { fetchCars } from '../service/api.js'
 import { createSlice } from '@reduxjs/toolkit'
+import { fetchCarsThunks } from './thunks.js';
 
 const carSlice = createSlice({
   name: 'cars',
@@ -10,15 +10,15 @@ const carSlice = createSlice({
     error: null,
   },
   extraReducers: builder => builder
-    .addCase(fetchCars.pending, (state) => {
+    .addCase(fetchCarsThunks.pending, (state) => {
       state.isLoading = true;
     })
-    .addCase(fetchCars.fulfilled, (state, { payload }) => {
+    .addCase(fetchCarsThunks.fulfilled, (state, { payload }) => {
       state.isLoading = false;
       state.carItems = payload
       state.error = null;
     })
-    .addCase(fetchCars.rejected, (state, { payload }) => {
+    .addCase(fetchCarsThunks.rejected, (state, { payload }) => {
       state.isLoading = false;
       state.error = payload;
     })
