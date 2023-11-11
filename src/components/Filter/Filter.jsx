@@ -52,14 +52,25 @@ const customStyles = {
 };
 
 const Filter = () => {
-  const carBrandOptions = useSelector(selectAllCarsItem);
-  const options = carBrandOptions.map((brand) => ({
+  const autoList = useSelector(selectAllCarsItem);
+
+  const options = autoList.map((brand) => ({
     label: brand,
   }));
-
   const onCarBrandLabel = (brand) => {
     console.log("Selected Car Brand Label:", brand.label);
   };
+
+  const priceOptions = [];
+  for (let i = 30; i <= 500; i += 10) {
+    priceOptions.push({ value: i, label: `$${i}` });
+  }
+  const onPriceSelect = (selectedOption) => {
+    console.log("Selected Price:", selectedOption.value);
+  };
+
+  // Вызовем функцию
+
   return (
     <ContainerFilter>
       {/* <form> */}
@@ -78,7 +89,12 @@ const Filter = () => {
         <SelectPrice>
           <FormGroup>
             <Label>Price/1 hour</Label>
-            <Select styles={customStyles} placeholder="To $" />
+            <Select
+              styles={customStyles}
+              placeholder="To $"
+              options={priceOptions}
+              onChange={onPriceSelect}
+            />
           </FormGroup>
         </SelectPrice>
         <InputWrapFirst>
