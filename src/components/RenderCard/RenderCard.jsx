@@ -8,13 +8,13 @@ import {
   Button,
   DescrRentCarTop,
 } from "../../components/RenderCard/RenderCard.styled";
-const RenderCard = ({ coinsData }) => {
+const RenderCard = () => {
   const carsItems = useSelector(selectCars);
 
   return (
     <div>
       <Items className="list">
-        {coinsData.map((car) => {
+        {carsItems.map((car) => {
           return (
             <Item key={car.id}>
               <Image src={car.img} alt="car" />

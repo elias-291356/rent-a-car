@@ -1,29 +1,14 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { fetchCars } from "../service/api";
 
-import { toast } from 'react-toastify';
-
-
-export const fetchCarsThunks = createAsyncThunk('adverts/car', async (_, thunkAPI) => {
-
+export const fetchCarsThunks = createAsyncThunk('adverts/car', async (page, thunkAPI) => {
   try {
-    const data = await fetchCars();
+    const data = await fetchCars(page);
     return data;
   } catch (error) {
-    toast.error('Error:' + error,);
+    console.error('Error fetching cars:', error);
+    throw error;
   }
 });
-
-// export const fetchLoadMoreThunks = createAsyncThunk('adverts/car', async (_, thunkAPI) => {
-//   try {
-//     const data = await fetchLoadMore();
-
-//     return data;
-//   } catch (error) {
-//     toast.error('Error:' + error,);
-//   }
-// });
-
-
 
 

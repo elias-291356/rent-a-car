@@ -23,7 +23,7 @@ const options = [
 const customStyles = {
   control: (provided, state) => ({
     ...provided,
-    // border: state.isFocused ? "2px solid #121417" : "2px solid #ddd", // Пример стиля для рамки при фокусе
+    // border: state.isFocused ? "2px solid #121417" : "2px solid #ddd",
     padding: "14px 16px 14px 18px ",
     boxShadow: "none",
     border: "none",
@@ -53,49 +53,47 @@ const customStyles = {
     backgroundColor: state.isSelected ? "#121417" : "white",
     color: state.isSelected ? "white" : "#121417",
   }),
-
-  // Другие кастомные стили по необходимости
 };
 const Filter = () => {
   return (
     <ContainerFilter>
-      <form>
-        <Form>
-          <SelectCarBrand>
-            <FormGroup>
-              <Label>Car brand</Label>
-              <Select
-                styles={customStyles}
-                placeholder="Enter the text"
-                options={options}
-              />
-            </FormGroup>
-          </SelectCarBrand>
-          <SelectPrice>
-            <FormGroup>
-              <Label>Price/1 hour</Label>
-              <Select
-                styles={customStyles}
-                placeholder="To $"
-                options={options}
-              />
-            </FormGroup>
-          </SelectPrice>
-          <InputWrapFirst>
-            <Label>Сar mileage/km</Label>
-            <InputWrapSecond>
-              {/* <FormGroup> */}
+      {/* <form> */}
+      <Form>
+        <SelectCarBrand>
+          <FormGroup>
+            <Label>Car brand</Label>
+            <Select
+              styles={customStyles}
+              placeholder="Enter the text"
+              options={options}
+            />
+          </FormGroup>
+        </SelectCarBrand>
+        <SelectPrice>
+          <FormGroup>
+            <Label>Price/1 hour</Label>
+            <Select
+              styles={customStyles}
+              placeholder="To $"
+              options={options}
+            />
+          </FormGroup>
+        </SelectPrice>
+        <InputWrapFirst>
+          <Label>Сar mileage/km</Label>
+          <InputWrapSecond>
+            {/* <FormGroup> */}
 
-              <Input placeholder="From" options={options} />
-              <Input placeholder="To" options={options} />
-              {/* </FormGroup> */}
-            </InputWrapSecond>
-          </InputWrapFirst>
-          <BtnFilterWrap>
-            <BtnFilter>Search</BtnFilter>
-          </BtnFilterWrap>
-        </Form>
-      </form>
+            <Input placeholder="From" options={options} />
+            <Input placeholder="To" options={options} />
+            {/* </FormGroup> */}
+          </InputWrapSecond>
+        </InputWrapFirst>
+        <BtnFilterWrap>
+          <BtnFilter>Search</BtnFilter>
+        </BtnFilterWrap>
+      </Form>
+      {/* </form> */}
     </ContainerFilter>
   );
 };

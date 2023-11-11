@@ -1,5 +1,5 @@
 
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 import { fetchCarsThunks } from './thunks.js';
 
 const carSlice = createSlice({
@@ -8,22 +8,28 @@ const carSlice = createSlice({
     carItems: [],
     isLoading: false,
     error: null,
+    page: 1,
+    limit: 12,
   },
 
-  extraReducers: builder => builder
-    .addCase(fetchCarsThunks.pending, (state) => {
-      state.isLoading = true;
-    })
-    .addCase(fetchCarsThunks.fulfilled, (state, { payload }) => {
-      state.isLoading = false;
-      state.carItems = payload
-      state.error = null;
-    })
-    .addCase(fetchCarsThunks.rejected, (state, { payload }) => {
-      state.isLoading = false;
-      state.error = payload;
-    })
+  reducers: {},
 
-})
+  extraReducers: (builder) =>
+    builder
+      .addCase(fetchCarsThunks.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(fetchCarsThunks.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        state.page++;
+        state.carItems.push(...action.payload);
+      })
+      .addCase(fetchCarsThunks.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      }),
+});
 
 export default carSlice.reducer;
