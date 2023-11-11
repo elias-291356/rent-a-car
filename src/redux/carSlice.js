@@ -9,6 +9,7 @@ const carSlice = createSlice({
     isLoading: false,
     error: null,
   },
+
   extraReducers: builder => builder
     .addCase(fetchCarsThunks.pending, (state) => {
       state.isLoading = true;
@@ -22,6 +23,7 @@ const carSlice = createSlice({
       state.isLoading = false;
       state.error = payload;
     })
+
 })
 
 export default carSlice.reducer;
