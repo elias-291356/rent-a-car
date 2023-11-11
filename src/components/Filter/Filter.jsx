@@ -11,15 +11,11 @@ import {
   SelectPrice,
 } from "./Filter.styled";
 import Select from "react-select";
-
 import { Form } from "./Filter.styled";
 import { Input } from "./Filter.styled";
-// import { SelectStyle } from "./Filter.styled";
-const options = [
-  { value: "option1", label: "Option 1" },
-  { value: "option2", label: "Option 2" },
-  // Другие ваши варианты
-];
+import { useSelector } from "react-redux";
+import { selectAllCarsItem } from "../../redux/carSelector";
+
 const customStyles = {
   control: (provided, state) => ({
     ...provided,
@@ -50,11 +46,20 @@ const customStyles = {
   }),
   option: (provided, state) => ({
     ...provided,
-    backgroundColor: state.isSelected ? "#121417" : "white",
-    color: state.isSelected ? "white" : "#121417",
+    backgroundColor: "#ffffff",
+    color: "#121417",
   }),
 };
+
 const Filter = () => {
+  const carBrandOptions = useSelector(selectAllCarsItem);
+  const options = carBrandOptions.map((brand) => ({
+    label: brand,
+  }));
+
+  const onCarBrandLabel = (brand) => {
+    console.log("Selected Car Brand Label:", brand.label);
+  };
   return (
     <ContainerFilter>
       {/* <form> */}
@@ -66,17 +71,14 @@ const Filter = () => {
               styles={customStyles}
               placeholder="Enter the text"
               options={options}
+              onChange={onCarBrandLabel}
             />
           </FormGroup>
         </SelectCarBrand>
         <SelectPrice>
           <FormGroup>
             <Label>Price/1 hour</Label>
-            <Select
-              styles={customStyles}
-              placeholder="To $"
-              options={options}
-            />
+            <Select styles={customStyles} placeholder="To $" />
           </FormGroup>
         </SelectPrice>
         <InputWrapFirst>

@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+
 const BASE_URL = "https://654baa7e5b38a59f28ef7bae.mockapi.io";
 const $instance = axios.create({ baseURL: BASE_URL });
 

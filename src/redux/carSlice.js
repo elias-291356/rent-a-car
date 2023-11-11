@@ -1,7 +1,7 @@
 
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchCarsThunks } from './thunks.js';
-
+import allCarsItem from "../makes.json";
 const carSlice = createSlice({
   name: 'cars',
   initialState: {
@@ -10,6 +10,7 @@ const carSlice = createSlice({
     error: null,
     page: 1,
     limit: 12,
+    allCarsItem: [...allCarsItem]
   },
 
   reducers: {},
