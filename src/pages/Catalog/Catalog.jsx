@@ -32,7 +32,7 @@ const CatalogPage = () => {
         console.log(data);
         setCoinsData(data);
       } catch (error) {
-        console.error("Ошибка при получении данных:", error);
+        console.error("error:", error);
       }
     };
 
