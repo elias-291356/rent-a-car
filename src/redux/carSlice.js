@@ -1,6 +1,6 @@
 
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchCarsThunks } from './thunks.js';
+import { fetchAllCarsThunks, fetchCarsThunks } from './thunks.js';
 import allCarsItem from "../makes.json";
 const carSlice = createSlice({
   name: 'cars',
@@ -13,11 +13,16 @@ const carSlice = createSlice({
     allCarsItem: [...allCarsItem],
     isSubmitted: false,
     carBrand: [],
+    filteredCars: [],
+    rentalPrice: '',
   },
 
   reducers: {
     setCarBrand: (state, action) => {
       state.carBrand = action.payload;
+    },
+    setRentalPrice: (state, action) => {
+      state.rentalPrice = action.payload;
     },
     setSubmitted: (state, action) => {
       state.isSubmitted = true;
@@ -39,8 +44,11 @@ const carSlice = createSlice({
       .addCase(fetchCarsThunks.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
-      }),
+      })
+      .addCase(fetchAllCarsThunks.fulfilled, (state, action) => {
+        state.filteredCars = action.payload;
+      })
 });
 
 export default carSlice.reducer;
-export const { setSubmitted, setCarBrand } = carSlice.actions;
+export const { setSubmitted, setCarBrand, setRentalPrice } = carSlice.actions;

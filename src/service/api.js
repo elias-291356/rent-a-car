@@ -13,5 +13,15 @@ export const fetchCars = async (page = 1, limit = 12) => {
   });
   return data;
 };
+export const fetchAllCars = async (filterQuery) => {
+  const { data } = await $instance.get('/adverts/car', {
+    params: {
+      ...filterQuery
+    }
+  }
+  );
+  console.log(data)
+  return data;
+};
 
 

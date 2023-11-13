@@ -14,17 +14,14 @@ import Select from "react-select";
 import { Form } from "./Filter.styled";
 import { Input } from "./Filter.styled";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  selectAllCarsItem,
-  selectCars,
-  selectSubmitForm,
-} from "../../redux/carSelector";
+import { selectCars, selectSubmitForm } from "../../redux/carSelector";
 import { toast } from "react-toastify";
 import { setCarBrand, setSubmitted } from "../../redux/carSlice";
+import { fetchAllCarsThunks } from "../../redux/thunks";
+import { useForm } from "react-hook-form";
 const customStyles = {
   control: (provided, state) => ({
     ...provided,
-    // border: state.isFocused ? "2px solid #121417" : "2px solid #ddd",
     padding: "14px 16px 14px 18px ",
     boxShadow: "none",
     border: "none",
@@ -57,35 +54,28 @@ const customStyles = {
 };
 
 const Filter = () => {
-  // const autoList = useSelector(selectAllCarsItem);
+  // const [selectedCarBrand, setSelectedCarBrand] = useState([]);
+  // const [selectedPrice, setSelectedPrice] = useState(null);
   const autoListData = useSelector(selectCars);
-  const isSubmitted = useSelector(selectSubmitForm);
-  // console.log(autoListData);
-  const [selectedCarBrand, setSelectedCarBrand] = useState([]);
-  console.log(selectedCarBrand);
-  const [selectedPrice, setSelectedPrice] = useState(null);
   const dispatch = useDispatch();
-  // const [fromValue, setFromValue] = useState("");
-  // const [toValue, setToValue] = useState("");
 
   const options = autoListData.map((carBrand) => ({
     label: carBrand.make,
     value: carBrand.make,
   }));
 
-  // Проверка повторяющихся make
   const uniqueOptions = options.filter((option, index, array) => {
     return (
       array.findIndex((element) => element.label === option.label) === index
     );
   });
 
-  const onCarBrandLabel = (brand) => {
-    // setSelectedCarBrand(brand);
-    // localStorage.setItem("selectedCarBrand", JSON.stringify(brand));
-    const selectedCar = autoListData.filter((car) => brand.label === car.make);
-    setSelectedCarBrand(selectedCar);
-  };
+  // const onCarBrandLabel = (brand) => {
+  //   // setSelectedCarBrand(brand);
+  //   // localStorage.setItem("selectedCarBrand", JSON.stringify(brand));
+  //   const selectedCar = autoListData.filter((car) => brand.label === car.make);
+  //   setSelectedCarBrand(selectedCar);
+  // };
 
   const priceOptions = [];
   for (let i = 30; i <= 500; i += 10) {
@@ -93,11 +83,11 @@ const Filter = () => {
   }
 
   const onPriceSelect = (selectedOption) => {
-    setSelectedPrice(selectedOption);
-    localStorage.setItem("selectedPrice", JSON.stringify(selectedOption));
+    // setSelectedPrice(selectedOption);
+    // localStorage.setItem("selectedPrice", JSON.stringify(selectedOption));
 
     const selectedOptionValue = String(selectedOption.value).replace("$", "");
-
+    console.log(selectedOptionValue);
     const selectedRentalPrice = autoListData.filter((car) => {
       const carRentalPrice = car.rentalPrice.replace("$", "");
       return selectedOptionValue === carRentalPrice;
@@ -107,7 +97,6 @@ const Filter = () => {
 
       return;
     }
-    console.log(selectedRentalPrice);
   };
 
   const mileageFrom = (event) => {
@@ -145,33 +134,35 @@ const Filter = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(setCarBrand(selectedCarBrand));
+    // dispatch(setCarBrand(selectedCarBrand));
     dispatch(setSubmitted(true));
-    // const numericFromValue = parseInt(fromValue, 10);
-    // const numericToValue = parseInt(toValue, 10);
+    // const formData = new FormData(event.target.elements);
+    let thunkObj = {
+      make: event.target.elements.make.value || "",
+      price: event.target.elements.price.value || 0,
+      mileageFrom: event.target.elements.mileageFrom.value || 0,
+      mileageTo: event.target.elements.mileageTo.value || 0,
+    };
+    dispatch(fetchAllCarsThunks(thunkObj));
+    // Используем forEach для обхода всех пар "ключ-значение" в объекте FormData
+    // formData.forEach((value, key) => {
+    //   console.log(`${key}: ${value}`);
+    // });
 
-    // const matchingCars = autoListData.filter(
-    //   (car) => car.mileage >= numericFromValue && car.mileage <= numericToValue
-    // );
-
-    // if (matchingCars.length > 0) {
-    //   matchingCars.forEach((matchingCar) => {
-    //     console.log("Совпадающая марка машины:", matchingCar.make);
-    //   });
-    // } else {
-    //   console.log("Машин с указанным диапазоном пробега не найдено.");
-    // }
+    // Очистка формы, если необходимо
+    dispatch(fetchAllCarsThunks()); /// передать обьект из формы сабмита
+    event.target.reset();
   };
-  useEffect(() => {
-    // const savedCarBrand = localStorage.getItem("selectedCarBrand");
-    // const savedPrice = localStorage.getItem("selectedPrice");
-    // if (savedCarBrand) {
-    //   setSelectedCarBrand(JSON.parse(savedCarBrand));
-    // }
-    // if (savedPrice) {
-    //   setSelectedPrice(JSON.parse(savedPrice));
-    // }
-  }, []);
+  // useEffect(() => {
+  // const savedCarBrand = localStorage.getItem("selectedCarBrand");
+  // const savedPrice = localStorage.getItem("selectedPrice");
+  // if (savedCarBrand) {
+  //   setSelectedCarBrand(JSON.parse(savedCarBrand));
+  // }
+  // if (savedPrice) {
+  //   setSelectedPrice(JSON.parse(savedPrice));
+  // }
+  // }, []);
 
   return (
     <ContainerFilter>
@@ -180,11 +171,12 @@ const Filter = () => {
           <FormGroup>
             <Label>Car brand</Label>
             <Select
+              name="make"
               styles={customStyles}
               placeholder="Enter the text"
               options={uniqueOptions}
-              value={selectedCarBrand}
-              onChange={onCarBrandLabel}
+              // value={selectedCarBrand}
+              // onChange={onCarBrandLabel}
             />
           </FormGroup>
         </SelectCarBrand>
@@ -192,36 +184,36 @@ const Filter = () => {
           <FormGroup>
             <Label>Price/1 hour</Label>
             <Select
+              name="price"
               styles={customStyles}
               placeholder="To $"
               options={priceOptions}
-              value={selectedPrice}
-              onChange={onPriceSelect}
+              // value={selectedPrice}
+              // onChange={onPriceSelect}
             />
           </FormGroup>
         </SelectPrice>
         <InputWrapFirst>
           <Label>Сar mileage/km</Label>
           <InputWrapSecond>
-            {/* <FormGroup> */}
-
             <Input
+              name="mileageFrom"
               placeholder="From"
               options={options}
               maxLength="7"
               onChange={mileageFrom}
             />
             <Input
+              name="mileageTo"
               placeholder="To"
               options={options}
               maxLength="7"
               onChange={mileageTo}
             />
-            {/* </FormGroup> */}
           </InputWrapSecond>
         </InputWrapFirst>
         <BtnFilterWrap>
-          <BtnFilter>Search</BtnFilter>
+          <BtnFilter type="submit">Search</BtnFilter>
         </BtnFilterWrap>
       </Form>
     </ContainerFilter>
@@ -229,15 +221,3 @@ const Filter = () => {
 };
 
 export default Filter;
-// <FormGroup>
-//           <Label>Сar mileage/km</Label>
-//           <Select
-//             styles={customStyles}
-//             placeholder="From"
-//             options={options}
-//           />
-//         </FormGroup>
-//         <FormGroup>
-//           <Label>Another label</Label>
-//           <Select styles={customStyles} placeholder="To" options={options} />
-//         </FormGroup>

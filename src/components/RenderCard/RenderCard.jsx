@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import {
   selectCarBrand,
   selectCars,
+  selectfilteredCars,
   selectSubmitForm,
 } from "../../redux/carSelector";
 import {
@@ -17,10 +18,8 @@ const RenderCard = () => {
   const carsItems = useSelector(selectCars);
   const carBrand = useSelector(selectCarBrand);
   const isSubmit = useSelector(selectSubmitForm);
-
-  console.log(carBrand);
-  // console.log(carBrandArr);
-  // const carBrandArray = Object.values(carBrand);
+  const filteredCars = useSelector(selectfilteredCars);
+  console.log(filteredCars);
   return (
     <div>
       <Items className="list">
@@ -65,40 +64,3 @@ const RenderCard = () => {
 };
 
 export default RenderCard;
-// return (
-//   <div>
-//     <Items className="list">
-//       {carBrand.map(
-//         ({
-//           id,
-//           img,
-//           make,
-//           year,
-//           rentalPrice,
-//           address,
-//           rentalCompany,
-//           type,
-//         }) => {
-//           return (
-//             <Item key={id}>
-//               <Image src={img} alt="car" />
-//               <DescrRentCarTop>
-//                 <p>
-//                   {make}, {year}
-//                 </p>
-
-//                 <p>{rentalPrice}</p>
-//               </DescrRentCarTop>
-//               <div>
-//                 <p>{address}</p>
-//                 <p>{rentalCompany}</p>
-//                 <p>{type}</p>
-//               </div>
-//               <Button>Learn more</Button>
-//             </Item>
-//           );
-//         }
-//       )}
-//     </Items>
-//   </div>
-// );
