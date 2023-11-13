@@ -10,10 +10,19 @@ const carSlice = createSlice({
     error: null,
     page: 1,
     limit: 12,
-    allCarsItem: [...allCarsItem]
+    allCarsItem: [...allCarsItem],
+    isSubmitted: false,
+    carBrand: [],
   },
 
-  reducers: {},
+  reducers: {
+    setCarBrand: (state, action) => {
+      state.carBrand = action.payload;
+    },
+    setSubmitted: (state, action) => {
+      state.isSubmitted = true;
+    },
+  },
 
   extraReducers: (builder) =>
     builder
@@ -34,3 +43,4 @@ const carSlice = createSlice({
 });
 
 export default carSlice.reducer;
+export const { setSubmitted, setCarBrand } = carSlice.actions;
