@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import { setIsOpenModal } from "../../redux/carSlice";
 import { Button, DescrRentCarTop } from "../RenderCard/RenderCard.styled";
 import { ItemModal, ItemWrap, ImageModal, ButtonModal } from "./Modal.styled";
-// import sprite from "../../images/sprite.svg";
 const Modal = ({ selectedCar }) => {
   const dispatch = useDispatch();
 
@@ -17,11 +16,8 @@ const Modal = ({ selectedCar }) => {
         onBtnCloseModal();
       }
     };
-
-    // Add event listener when the component mounts
     window.addEventListener("keydown", handleKeyDown);
     document.body.style.overflow = "hidden";
-    // Remove event listener when the component unmounts
     return () => {
       document.body.style.overflow = "visible";
       window.removeEventListener("keydown", handleKeyDown);

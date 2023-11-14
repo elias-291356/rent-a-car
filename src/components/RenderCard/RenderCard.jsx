@@ -17,6 +17,8 @@ import {
 import { setIsOpenModal } from "../../redux/carSlice";
 import Modal from "../Modal/Modal";
 import { ModalBackdrop } from "../Modal/Modal.styled";
+import { setFavoriteCars } from "../../redux/carSlice";
+// import sprite from "../../sprite.svg";
 
 const RenderCard = () => {
   const [selectedCarItemsModal, setSelectedCarItemsModal] = useState(null);
@@ -26,7 +28,6 @@ const RenderCard = () => {
   const isSubmit = useSelector(selectSubmitForm);
   const carsItems = useSelector(selectCars);
   const dispatch = useDispatch();
-
   const openModalFilteredModal = (id) => {
     const car = filteredCars.filter((car) => car.id === id);
     setSelectedCarModal(car);
@@ -44,7 +45,7 @@ const RenderCard = () => {
     const favoriteCars = JSON.parse(localStorage.getItem("favoriteCars")) || [];
     const updatedFavoriteCars = [...favoriteCars, ...car];
     localStorage.setItem("favoriteCars", JSON.stringify(updatedFavoriteCars));
-    console.log(updatedFavoriteCars);
+    dispatch(setFavoriteCars(updatedFavoriteCars));
   };
   return (
     <div>
@@ -53,6 +54,9 @@ const RenderCard = () => {
           ? filteredCars.map((car) => (
               <Item key={car.id}>
                 <Favorite onClick={() => onSelectFavorite(car.id)}>
+                  {/* <svg>
+                    <use xlinkHref={`${sprite}#favorite`} />
+                  </svg> */}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="18"

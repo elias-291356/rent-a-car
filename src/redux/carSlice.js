@@ -13,6 +13,8 @@ const carSlice = createSlice({
     page: 1,
     limit: 12,
     isOpenModal: false,
+    favoriteCars: [],
+
   },
 
   reducers: {
@@ -23,6 +25,10 @@ const carSlice = createSlice({
     },
     setIsOpenModal: (state, action) => {
       state.isOpenModal = action.payload;
+    },
+    setFavoriteCars: (state, action) => {
+      state.favoriteCars = action.payload;
+
     },
 
   },
@@ -64,5 +70,6 @@ const carSlice = createSlice({
 
 });
 
-export default carSlice.reducer;
-export const { setSubmitted, setIsOpenModal } = carSlice.actions;
+export const reducerCar = carSlice.reducer;
+
+export const { setSubmitted, setIsOpenModal, setFavoriteCars } = carSlice.actions;
