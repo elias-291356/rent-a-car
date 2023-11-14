@@ -39,13 +39,20 @@ const RenderCard = () => {
     dispatch(setIsOpenModal(true));
   };
 
+  const onSelectFavorite = (id) => {
+    const car = carsItems.filter((car) => car.id === id);
+    const favoriteCars = JSON.parse(localStorage.getItem("favoriteCars")) || [];
+    const updatedFavoriteCars = [...favoriteCars, ...car];
+    localStorage.setItem("favoriteCars", JSON.stringify(updatedFavoriteCars));
+    console.log(updatedFavoriteCars);
+  };
   return (
     <div>
       <Items className="list">
         {isSubmit
           ? filteredCars.map((car) => (
               <Item key={car.id}>
-                <Favorite>
+                <Favorite onClick={() => onSelectFavorite(car.id)}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="18"
@@ -82,7 +89,7 @@ const RenderCard = () => {
             ))
           : carsItems.map((car) => (
               <Item key={car.id}>
-                <Favorite>
+                <Favorite onClick={() => onSelectFavorite(car.id)}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="18"
