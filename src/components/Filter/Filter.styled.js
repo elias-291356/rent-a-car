@@ -90,3 +90,9 @@ justify-content:center;
 margin-top: 25px;
 
 `
+
+export const WrapInputes = styled.div`
+display:flex;
+column-gap: 2px;
+
+`

@@ -1,8 +1,9 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   selectCars,
   selectfilteredCars,
+  selectIsOpenModal,
   selectSubmitForm,
 } from "../../redux/carSelector";
 import {
@@ -12,11 +13,28 @@ import {
   Button,
   DescrRentCarTop,
 } from "../../components/RenderCard/RenderCard.styled";
+import { setIsOpenModal } from "../../redux/carSlice";
+import Modal from "../Modal/Modal";
 
 const RenderCard = () => {
-  const carsItems = useSelector(selectCars);
-  const isSubmit = useSelector(selectSubmitForm);
+  const [selectedCarItemsModal, setSelectedCarItemsModal] = useState(null);
+  const [selectedCarModal, setSelectedCarModal] = useState(null);
   const filteredCars = useSelector(selectfilteredCars);
+  const isOpenModal = useSelector(selectIsOpenModal);
+  const isSubmit = useSelector(selectSubmitForm);
+  const carsItems = useSelector(selectCars);
+  const dispatch = useDispatch();
+
+  const openModalFilteredModal = (id) => {
+    const car = filteredCars.filter((car) => car.id === id);
+    setSelectedCarModal(car);
+    dispatch(setIsOpenModal(true));
+  };
+  const openModalcarsItems = (id) => {
+    const car = carsItems.filter((car) => car.id === id);
+    setSelectedCarItemsModal(car);
+    dispatch(setIsOpenModal(true));
+  };
 
   return (
     <div>
@@ -36,7 +54,9 @@ const RenderCard = () => {
                   <p>{car.rentalCompany}</p>
                   <p>{car.type}</p>
                 </div>
-                <Button>Learn more</Button>
+                <Button onClick={() => openModalFilteredModal(car.id)}>
+                  Learn more
+                </Button>
               </Item>
             ))
           : carsItems.map((car) => (
@@ -53,10 +73,15 @@ const RenderCard = () => {
                   <p>{car.rentalCompany}</p>
                   <p>{car.type}</p>
                 </div>
-                <Button>Learn more</Button>
+                <Button onClick={() => openModalcarsItems(car.id)}>
+                  Learn more
+                </Button>
               </Item>
             ))}
       </Items>
+      {isOpenModal ? (
+        <Modal selectedCar={selectedCarModal || selectedCarItemsModal} />
+      ) : null}
     </div>
   );
 };

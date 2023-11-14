@@ -12,9 +12,7 @@ const carSlice = createSlice({
     error: null,
     page: 1,
     limit: 12,
-
-
-
+    isOpenModal: false,
   },
 
   reducers: {
@@ -22,6 +20,9 @@ const carSlice = createSlice({
 
     setSubmitted: (state, action) => {
       state.isSubmitted = true;
+    },
+    setIsOpenModal: (state, action) => {
+      state.isOpenModal = action.payload;
     },
 
   },
@@ -55,15 +56,13 @@ const carSlice = createSlice({
         state.error = null;
         state.filteredCars = action.payload;
         state.isSubmitted = true
-
       })
 
       .addCase(fetchAllCarsThunks.rejected, (state, action) => {
-
         state.filteredCars.push(...action.payload);
       })
 
 });
 
 export default carSlice.reducer;
-export const { setSubmitted } = carSlice.actions;
+export const { setSubmitted, setIsOpenModal } = carSlice.actions;

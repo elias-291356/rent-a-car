@@ -19,9 +19,8 @@ export const Item = styled.li`
 export const Items = styled.ul`
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     padding-left:0px;
-    gap: 29px 50px;
+    gap: 27px 27px;
     text-decoration: none;
 
 `

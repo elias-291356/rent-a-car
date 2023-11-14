@@ -229,6 +229,7 @@ import {
   FormGroup,
   Input,
   Label,
+  WrapInputes,
 } from "./Filter.styled";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCars } from "../../redux/carSelector";
@@ -253,9 +254,10 @@ const customStyles = {
     fontWeight: 500,
     lineHeight: "20px",
   }),
-  singleValue: (provided) => ({
+  singleValue: (provided, state) => ({
     ...provided,
-    color: "#121417",
+    // color: state.isSelected ? "#171612" : "#121417",
+    color: "#171612",
     fontFamily: "Manrope",
     fontSize: "18px",
     fontStyle: "normal",
@@ -265,7 +267,8 @@ const customStyles = {
   option: (provided, state) => ({
     ...provided,
     backgroundColor: "#ffffff",
-    color: "#121417",
+    color: "rgba(18, 20, 23, 0.20)",
+    // color: isSelected ? "#000000" : "#1165e2",
   }),
 };
 
@@ -332,16 +335,14 @@ const Filter = () => {
 
         <FormGroup>
           <Label>Car mileage/km</Label>
-          <Input
-            type="number"
-            placeholder="mileageFrom"
-            {...register("mileageFrom")}
-          />
-          <Input
-            type="number"
-            placeholder="mileageTo"
-            {...register("mileageTo")}
-          />
+          <WrapInputes>
+            <Input
+              type="number"
+              placeholder="From"
+              {...register("mileageFrom")}
+            />
+            <Input type="number" placeholder="To" {...register("mileageTo")} />
+          </WrapInputes>
         </FormGroup>
 
         <BtnFilterWrap>
