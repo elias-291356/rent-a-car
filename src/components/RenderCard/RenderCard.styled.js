@@ -10,6 +10,7 @@ export const Image = styled.img`
   height:270px;
 `
 export const Item = styled.li`
+position: relative;
   max-width:275px;
   height:425px;
   display:flex;
@@ -38,6 +39,16 @@ export const Button = styled.button`
 export const DescrRentCarTop = styled.div`
   display:flex;
   justify-content: space-between;
+
+
+`
+export const Favorite = styled.div`
+position: absolute;
+top: 14px;
+right: 14px;
+ width: 18px;
+ height: 18px;
+
 
 
 `
