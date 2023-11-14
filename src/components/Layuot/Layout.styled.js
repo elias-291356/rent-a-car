@@ -3,9 +3,6 @@ export const ContainerLayout = styled.div`
   width: 1183px;
    margin-right: auto;
    margin-left: auto;
-
-  background-color: rgba(139, 165, 162, 0.49);
-  
 `
 export const Items = styled.ul`
     display: flex;

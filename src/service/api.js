@@ -20,7 +20,6 @@ export const fetchAllCars = async (filterQuery) => {
     }
   }
   );
-  console.log(data)
   return data;
 };
 

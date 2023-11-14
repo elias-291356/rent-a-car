@@ -1,7 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import {
-  selectCarBrand,
   selectCars,
   selectfilteredCars,
   selectSubmitForm,
@@ -16,15 +15,14 @@ import {
 
 const RenderCard = () => {
   const carsItems = useSelector(selectCars);
-  const carBrand = useSelector(selectCarBrand);
   const isSubmit = useSelector(selectSubmitForm);
   const filteredCars = useSelector(selectfilteredCars);
-  console.log(filteredCars);
+
   return (
     <div>
       <Items className="list">
         {isSubmit
-          ? carBrand.map((car) => (
+          ? filteredCars.map((car) => (
               <Item key={car.id}>
                 <Image src={car.img} alt="car" />
                 <DescrRentCarTop>
