@@ -39,7 +39,7 @@ width:100%;
 export const ButtonModal = styled.div`
  width:20px;
  height: 20px;
-border: 1px solid blue;
+/* border: 1px solid blue; */
 margin-left: 100%;
 
 

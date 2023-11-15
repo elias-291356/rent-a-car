@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectCars,
@@ -26,8 +26,9 @@ const RenderCard = () => {
   const filteredCars = useSelector(selectfilteredCars);
   const isOpenModal = useSelector(selectIsOpenModal);
   const isSubmit = useSelector(selectSubmitForm);
-  const carsItems = useSelector(selectCars);
   const dispatch = useDispatch();
+  const carsItems = useSelector(selectCars);
+
   const openModalFilteredModal = (id) => {
     const car = filteredCars.filter((car) => car.id === id);
     setSelectedCarModal(car);

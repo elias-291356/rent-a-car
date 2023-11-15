@@ -30,10 +30,30 @@ const Modal = ({ selectedCar }) => {
         {selectedCar &&
           selectedCar.map((car) => (
             <ItemModal key={car.id}>
-              <ButtonModal
-                type="button"
-                onClick={onBtnCloseModal}
-              ></ButtonModal>
+              <ButtonModal type="button" onClick={onBtnCloseModal}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                >
+                  <path
+                    d="M18 6L6 18"
+                    stroke="#121417"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M6 6L18 18"
+                    stroke="#121417"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </ButtonModal>
               <ImageModal src={car.img} alt="car" />
               <DescrRentCarTop>
                 <p>
