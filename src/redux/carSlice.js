@@ -5,15 +5,17 @@ import { fetchAllCarsThunks, fetchCarsThunks } from './thunks.js';
 const carSlice = createSlice({
   name: 'cars',
   initialState: {
-    carItems: [],
+    filteredFavoriteCars: [],
+    favoriteCars: [],
     filteredCars: [],
-    isLoading: false,
-    isSubmitted: false,
-    error: null,
+    carItems: [],
     page: 1,
     limit: 12,
+    error: null,
+    isLoading: false,
     isOpenModal: false,
-    favoriteCars: [],
+    isSubmitted: false,
+    isSubmittedFaforiteForm: false,
 
   },
 
@@ -29,6 +31,12 @@ const carSlice = createSlice({
     setFavoriteCars: (state, action) => {
       state.favoriteCars = action.payload;
 
+    },
+    setFilteredFavoriteCars: (state, action) => {
+      state.filteredFavoriteCars = action.payload;
+    },
+    setIsSubmittedFaforiteForm: (state, action) => {
+      state.isSubmittedFaforiteForm = action.payload;
     },
 
   },
@@ -72,4 +80,4 @@ const carSlice = createSlice({
 
 export const reducerCar = carSlice.reducer;
 
-export const { setSubmitted, setIsOpenModal, setFavoriteCars } = carSlice.actions;
+export const { setSubmitted, setIsOpenModal, setFavoriteCars, setFilteredFavoriteCars, setIsSubmittedFaforiteForm } = carSlice.actions;

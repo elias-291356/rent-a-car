@@ -4,7 +4,9 @@ import {
   selectCars,
   selectFavoriteCars,
   selectfilteredCars,
+  selectFilteredFavoriteCars,
   selectIsOpenModal,
+  selectIsSubmittedFaforiteForm,
   selectSubmitForm,
 } from "../../redux/carSelector";
 import { setFavoriteCars, setIsOpenModal } from "../../redux/carSlice";
@@ -21,15 +23,13 @@ import {
 } from "../RenderCard/RenderCard.styled";
 
 const FavoritesCars = () => {
-  const localStorageFavorite = useSelector(selectFavoriteCars);
-
   const [selectedCarItemsModal, setSelectedCarItemsModal] = useState(null);
   const [selectedCarModal, setSelectedCarModal] = useState(null);
-  const filteredCars = useSelector(selectfilteredCars);
+  const localStorageFavorite = useSelector(selectFavoriteCars);
+  const filteredFavoriteCars = useSelector(selectFilteredFavoriteCars);
   const isOpenModal = useSelector(selectIsOpenModal);
-  const isSubmit = useSelector(selectSubmitForm);
+  const isSubmitForm = useSelector(selectIsSubmittedFaforiteForm);
   const dispatch = useDispatch();
-  // const carsItems = useSelector(selectCars);
 
   const openModalFilteredModal = (id) => {
     const car = localStorageFavorite.filter((car) => car.id === id);
@@ -58,13 +58,10 @@ const FavoritesCars = () => {
   return (
     <div>
       <Items className="list">
-        {isSubmit
-          ? localStorageFavorite.map((car) => (
+        {isSubmitForm
+          ? filteredFavoriteCars.map((car) => (
               <Item key={car.id}>
                 <Favorite onClick={() => onRemoveFavorite(car.id)}>
-                  {/* <svg>
-                    <use xlinkHref={`${sprite}#favorite`} />
-                  </svg> */}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="18"

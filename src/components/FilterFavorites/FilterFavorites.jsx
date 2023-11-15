@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Select from "react-select";
 import {
   BtnFilter,
@@ -9,11 +9,15 @@ import {
   Input,
   Label,
   WrapInputes,
-} from "./Filter.styled";
-import { useDispatch, useSelector } from "react-redux";
-import { selectCars } from "../../redux/carSelector";
-import { fetchAllCarsThunks } from "../../redux/thunks";
+} from "../Filter/Filter.styled";
+import { useDispatch } from "react-redux";
+
 import { useForm, Controller } from "react-hook-form";
+
+import {
+  setFilteredFavoriteCars,
+  setIsSubmittedFaforiteForm,
+} from "../../redux/carSlice";
 
 const customStyles = {
   control: (provided, state) => ({
@@ -51,15 +55,20 @@ const customStyles = {
   }),
 };
 
-const Filter = () => {
+const FavoritesFilter = () => {
   const { register, handleSubmit, control } = useForm();
-  const autoListData = useSelector(selectCars);
-
+  const [sortedCarsData, setSortedCarsData] = useState([]);
+  const [isSubmit, setIsSubmit] = useState(false);
   const dispatch = useDispatch();
-  const options = autoListData.map((carBrand) => ({
-    label: carBrand.make,
-    value: carBrand.make,
-  }));
+
+  const favoriteCars = JSON.parse(localStorage.getItem("favoriteCars")) || [];
+
+  const options = Array.isArray(favoriteCars)
+    ? favoriteCars.map((carBrand) => ({
+        label: carBrand.make,
+        value: carBrand.make,
+      }))
+    : [];
 
   const uniqueOptions = options.filter((option, index, array) => {
     return (
@@ -70,10 +79,29 @@ const Filter = () => {
   for (let i = 30; i <= 500; i += 10) {
     priceOptions.push({ value: i, label: `$${i}` });
   }
-
   const onSubmit = (data) => {
-    dispatch(fetchAllCarsThunks(data));
+    const sortedCars = favoriteCars
+      .filter((car) => {
+        return (
+          (!data.make || car.make === data.make.label) &&
+          (!data.price || car.price <= data.price.value) &&
+          (!data.mileageFrom || car.mileage >= parseInt(data.mileageFrom)) &&
+          (!data.mileageTo || car.mileage <= parseInt(data.mileageTo))
+        );
+      })
+      .sort((a, b) => {
+        if (a.make !== b.make) {
+          return a.make.localeCompare(b.make);
+        } else {
+          return a.price - b.price;
+        }
+      });
+    setIsSubmit(true);
+
+    setSortedCarsData(sortedCars);
   };
+  dispatch(setIsSubmittedFaforiteForm(isSubmit));
+  dispatch(setFilteredFavoriteCars(sortedCarsData));
 
   return (
     <ContainerFilter>
@@ -125,11 +153,13 @@ const Filter = () => {
         </FormGroup>
 
         <BtnFilterWrap>
-          <BtnFilter type="submit">Search</BtnFilter>
+          <BtnFilter type="submit" onClick={onSubmit}>
+            Search
+          </BtnFilter>
         </BtnFilterWrap>
       </Form>
     </ContainerFilter>
   );
 };
 
-export default Filter;
+export default FavoritesFilter;

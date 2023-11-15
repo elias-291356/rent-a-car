@@ -9,6 +9,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSelector } from "react-redux";
 import FavoritesCars from "../../components/FavoritesCars/FavoritesCars";
+import FavoritesFilter from "../../components/FilterFavorites/FilterFavorites";
 
 const FavoritesPage = () => {
   const isLoading = useSelector(selectLoader);
@@ -18,7 +19,7 @@ const FavoritesPage = () => {
   ) : (
     <>
       <Container>
-        <Filter />
+        <FavoritesFilter />
         <FavoritesCars />
         <ToastContainer />
       </Container>

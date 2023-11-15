@@ -7,5 +7,8 @@ export const selectSubmitForm = (state) => state.cars.isSubmitted;
 export const selectIsOpenModal = (state) => state.cars.isOpenModal;
 export const selectfilteredCars = (state) => state.cars.filteredCars;
 export const selectFavoriteCars = (state) => state.cars.favoriteCars;
+export const selectFilteredFavoriteCars = (state) => state.cars.filteredFavoriteCars;
+export const selectIsSubmittedFaforiteForm = (state) => state.cars.isSubmittedFaforiteForm;
+
 
 
