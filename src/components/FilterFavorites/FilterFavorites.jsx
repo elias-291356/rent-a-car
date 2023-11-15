@@ -10,10 +10,13 @@ import {
   Label,
   WrapInputes,
 } from "../Filter/Filter.styled";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { useForm, Controller } from "react-hook-form";
-
+import {
+  selectFilteredFavoriteCars,
+  selectIsSubmittedFaforiteForm,
+} from "../../redux/carSelector";
 import {
   setFilteredFavoriteCars,
   setIsSubmittedFaforiteForm,
@@ -56,8 +59,11 @@ const customStyles = {
 };
 
 const FavoritesFilter = () => {
-  const { register, handleSubmit, control } = useForm();
+  const filteredFavoriteCars = useSelector(selectFilteredFavoriteCars);
+  const isSubmitForm = useSelector(selectIsSubmittedFaforiteForm);
+
   const [sortedCarsData, setSortedCarsData] = useState([]);
+  const { register, handleSubmit, control } = useForm();
   const [isSubmit, setIsSubmit] = useState(false);
   const dispatch = useDispatch();
 
