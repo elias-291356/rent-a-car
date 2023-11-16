@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Select from "react-select";
-import { toast } from "react-toastify";
+
 import {
   BtnFilter,
   BtnFilterWrap,
@@ -15,7 +15,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useForm, Controller } from "react-hook-form";
 
 import {
-  selectClearFilter,
   selectFilteredFavoriteCars,
   selectIsSubmittedFaforiteForm,
 } from "../../redux/carSelector";
@@ -44,7 +43,6 @@ const customStyles = {
   }),
   singleValue: (provided, state) => ({
     ...provided,
-    // color: state.isSelected ? "#171612" : "#121417",
     color: "#171612",
     fontFamily: "Manrope",
     fontSize: "18px",
@@ -56,7 +54,6 @@ const customStyles = {
     ...provided,
     backgroundColor: "#ffffff",
     color: "rgba(18, 20, 23, 0.20)",
-    // color: isSelected ? "#000000" : "#1165e2",
   }),
 };
 
@@ -112,8 +109,6 @@ const FavoritesFilter = () => {
     dispatch(setIsSubmittedFaforiteForm(isSubmit));
     dispatch(setFilteredFavoriteCars(filteredCars));
   };
-
-  const clearFilter = () => {};
 
   return (
     <ContainerFilter>

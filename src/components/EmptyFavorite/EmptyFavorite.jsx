@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { selectLoader } from "../../redux/carSelector";
 import { Loader } from "../Loader/Loader";
 

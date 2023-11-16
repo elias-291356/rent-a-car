@@ -40,9 +40,17 @@ width:100%;
 export const ButtonModal = styled.div`
  width:20px;
  height: 20px;
-/* border: 1px solid blue; */
 margin-left: 100%;
 
+`
+export const ButtonModalSend = styled.div`
+margin-top: 20px;
+padding: 12px 50px;
+  width: 170px;
+  border-radius: 12px;
+  background-color: #3470ff;
+  border: none;
+  color: white;
 
 `
 export const AdvantagesCar = styled.div`

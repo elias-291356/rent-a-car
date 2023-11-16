@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 
 import { setIsOpenModal } from "../../redux/carSlice";
 import {
-  Button,
   SubTitleDescrCar,
   TitleDescrCar,
   WrapDescription,
@@ -18,11 +17,11 @@ import {
   FunctionalitiesParagraph,
   AccessoriesMainWrap,
   AccessoriesTop,
-  AccessoriesBottom,
   FunctionalitiesBottom,
   RentalConditions,
   AgeAndLicense,
   Requires,
+  ButtonModalSend,
 } from "./Modal.styled";
 const Modal = ({ selectedCar }) => {
   const dispatch = useDispatch();
@@ -125,7 +124,7 @@ const Modal = ({ selectedCar }) => {
                   <p>Price: {car.rentalPrice}</p>
                 </Requires>
               </RentalConditions>
-              <Button type="submit">Rental car</Button>
+              <ButtonModalSend type="submit">Rental car</ButtonModalSend>
             </ItemModal>
           ))}
       </ItemWrap>
