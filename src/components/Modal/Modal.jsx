@@ -6,8 +6,24 @@ import {
   Button,
   SubTitleDescrCar,
   TitleDescrCar,
+  WrapDescription,
 } from "../RenderCard/RenderCard.styled";
-import { ItemModal, ItemWrap, ImageModal, ButtonModal } from "./Modal.styled";
+import {
+  ItemModal,
+  ItemWrap,
+  ImageModal,
+  ButtonModal,
+  AdvantagesCar,
+  Functionalities,
+  FunctionalitiesParagraph,
+  AccessoriesMainWrap,
+  AccessoriesTop,
+  AccessoriesBottom,
+  FunctionalitiesBottom,
+  RentalConditions,
+  AgeAndLicense,
+  Requires,
+} from "./Modal.styled";
 const Modal = ({ selectedCar }) => {
   const dispatch = useDispatch();
 
@@ -61,15 +77,54 @@ const Modal = ({ selectedCar }) => {
               <ImageModal src={car.img} alt="car" />
               <TitleDescrCar>
                 <p>
-                  {car.make}, {car.year}
+                  {car.make}, {car.model}
                 </p>
-                <p>{car.rentalPrice}</p>
               </TitleDescrCar>
-              <SubTitleDescrCar>
-                <p>{car.address}</p>
-                <p>{car.rentalCompany}</p>
-                <p>{car.type}</p>
-              </SubTitleDescrCar>
+              <WrapDescription>
+                <SubTitleDescrCar>
+                  <p>{car.address.split(", ").slice(-2, -1)}</p>
+                  <p>{car.address.split(", ").pop()}</p>
+                  <p>{car.rentalCompany}</p>
+                </SubTitleDescrCar>
+                <SubTitleDescrCar>
+                  <p>{car.type.split(" ")[0]}</p>
+                  <p>{car.model.split(" ")[0]}</p>
+                  <p>{car.mileage}</p>
+                  <p>{car.functionalities[car.functionalities.length - 2]}</p>
+                </SubTitleDescrCar>
+              </WrapDescription>
+              <AdvantagesCar>
+                <p>{car.description}</p>
+              </AdvantagesCar>
+              <Functionalities>
+                <FunctionalitiesParagraph>
+                  Accessories and functionalities:
+                </FunctionalitiesParagraph>
+              </Functionalities>
+              <AccessoriesMainWrap>
+                <AccessoriesTop>
+                  <p>{car.accessories[0]}</p>
+                  <p>{car.accessories[1]}</p>
+                  <p>{car.accessories[2]}</p>
+                </AccessoriesTop>
+                <FunctionalitiesBottom>
+                  <p>{car.functionalities[0]}</p>
+                  <p>{car.functionalities[1]}</p>
+                  <p>{car.functionalities[2]}</p>
+                </FunctionalitiesBottom>
+              </AccessoriesMainWrap>
+              <RentalConditions>
+                <p>Rental Conditions: </p>
+                <AgeAndLicense>
+                  <p>{car.rentalConditions.split("\n")[0]}</p>
+                  <p>{car.rentalConditions.split("\n")[1]}</p>
+                </AgeAndLicense>
+                <Requires>
+                  <p>{car.rentalConditions.split("\n")[2]}</p>
+                  <p>Mileage: {car.mileage}</p>
+                  <p>Price: {car.rentalPrice}</p>
+                </Requires>
+              </RentalConditions>
               <Button type="submit">Rental car</Button>
             </ItemModal>
           ))}

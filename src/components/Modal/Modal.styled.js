@@ -35,6 +35,7 @@ export const ImageModal = styled.img`
 width:100%;
   height:270px;
   border-radius: 24px;
+  padding-bottom: 20px;
 `
 export const ButtonModal = styled.div`
  width:20px;
@@ -42,5 +43,81 @@ export const ButtonModal = styled.div`
 /* border: 1px solid blue; */
 margin-left: 100%;
 
+
+`
+export const AdvantagesCar = styled.div`
+display:flex;
+margin-top: 20px;
+margin-bottom: 20px;
+color: #121417;
+font-family: Manrope,sans-serif;
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: 1.4;
+
+`
+export const FunctionalitiesParagraph = styled.p`
+color: #121417;
+
+font-family: Manrope,sans-serif;
+font-size: 24px;
+font-style: normal;
+font-weight: 500;
+line-height: 1.4; /* 142.857% */
+
+`
+export const Functionalities = styled.div`
+
+display: flex;
+flex-direction: column;
+color: #121417;
+font-family: Manrope,sans-serif;
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: 1.3; 
+row-gap: 6px;
+`
+export const AccessoriesMainWrap = styled.div`
+display: flex;
+flex-direction: column;
+
+
+`
+export const AccessoriesTop = styled.div`
+display: flex;
+
+`
+export const FunctionalitiesBottom = styled.div`
+
+display: flex;
+`
+export const RentalConditions = styled.div`
+row-gap: 8px;
+display: flex;
+flex-direction:column;
+`
+export const AgeAndLicense = styled.div`
+display: flex;
+column-gap: 8px;
+color: #363535;
+
+font-family: Manrope;
+font-size: 12px;
+font-style: normal;
+font-weight: 400;
+line-height: 18px; /* 150% */
+`
+export const Requires = styled.div`
+display: flex;
+column-gap: 8px;
+color: #363535;
+
+font-family: Manrope;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: 18px; /* 150% */
 
 `
