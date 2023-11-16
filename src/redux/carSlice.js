@@ -17,6 +17,7 @@ const carSlice = createSlice({
     isSubmitted: false,
     isSubmittedFaforiteForm: false,
 
+
   },
 
   reducers: {
@@ -25,6 +26,7 @@ const carSlice = createSlice({
     setSubmitted: (state, action) => {
       state.isSubmitted = true;
     },
+
     setIsOpenModal: (state, action) => {
       state.isOpenModal = action.payload;
     },
@@ -34,6 +36,7 @@ const carSlice = createSlice({
     },
     setFilteredFavoriteCars: (state, action) => {
       state.filteredFavoriteCars = action.payload;
+
     },
     setIsSubmittedFaforiteForm: (state, action) => {
       state.isSubmittedFaforiteForm = action.payload;

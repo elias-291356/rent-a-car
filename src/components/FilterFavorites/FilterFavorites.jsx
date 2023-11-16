@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Select from "react-select";
+import { toast } from "react-toastify";
 import {
   BtnFilter,
   BtnFilterWrap,
@@ -11,9 +12,10 @@ import {
   WrapInputes,
 } from "../Filter/Filter.styled";
 import { useDispatch, useSelector } from "react-redux";
-
 import { useForm, Controller } from "react-hook-form";
+
 import {
+  selectClearFilter,
   selectFilteredFavoriteCars,
   selectIsSubmittedFaforiteForm,
 } from "../../redux/carSelector";
@@ -85,12 +87,13 @@ const FavoritesFilter = () => {
   for (let i = 30; i <= 500; i += 10) {
     priceOptions.push({ value: i, label: `$${i}` });
   }
+
   const onSubmit = (data) => {
-    const sortedCars = favoriteCars
+    const filteredCars = favoriteCars
       .filter((car) => {
         return (
           (!data.make || car.make === data.make.label) &&
-          (!data.price || car.price <= data.price.value) &&
+          (!data.rentalPrice || car.rentalPrice >= data.rentalPrice) &&
           (!data.mileageFrom || car.mileage >= parseInt(data.mileageFrom)) &&
           (!data.mileageTo || car.mileage <= parseInt(data.mileageTo))
         );
@@ -99,15 +102,18 @@ const FavoritesFilter = () => {
         if (a.make !== b.make) {
           return a.make.localeCompare(b.make);
         } else {
-          return a.price - b.price;
+          return a.rentalPrice - b.rentalPrice;
         }
       });
+
+    setSortedCarsData(filteredCars);
     setIsSubmit(true);
 
-    setSortedCarsData(sortedCars);
+    dispatch(setIsSubmittedFaforiteForm(isSubmit));
+    dispatch(setFilteredFavoriteCars(filteredCars));
   };
-  dispatch(setIsSubmittedFaforiteForm(isSubmit));
-  dispatch(setFilteredFavoriteCars(sortedCarsData));
+
+  const clearFilter = () => {};
 
   return (
     <ContainerFilter>
@@ -162,6 +168,9 @@ const FavoritesFilter = () => {
           <BtnFilter type="submit" onClick={onSubmit}>
             Search
           </BtnFilter>
+          {/* <BtnFilter type="submit" onClick={clearFilter}>
+            Clear
+          </BtnFilter> */}
         </BtnFilterWrap>
       </Form>
     </ContainerFilter>

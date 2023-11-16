@@ -1,5 +1,4 @@
 import React from "react";
-import Filter from "../../components/Filter/Filter";
 
 import { Loader } from "../../components/Loader/Loader";
 import { Container } from "../../components/RenderCard/RenderCard.styled";
@@ -10,6 +9,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { useSelector } from "react-redux";
 import FavoritesCars from "../../components/FavoritesCars/FavoritesCars";
 import FavoritesFilter from "../../components/FilterFavorites/FilterFavorites";
+
+import EmptyFavorite from "../../components/EmptyFavorite/EmptyFavorite";
 
 const FavoritesPage = () => {
   const isLoading = useSelector(selectLoader);
@@ -28,3 +29,4 @@ const FavoritesPage = () => {
 };
 
 export default FavoritesPage;
+// FavoritesBachground;

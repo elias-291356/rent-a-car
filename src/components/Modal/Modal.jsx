@@ -2,7 +2,11 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 import { setIsOpenModal } from "../../redux/carSlice";
-import { Button, DescrRentCarTop } from "../RenderCard/RenderCard.styled";
+import {
+  Button,
+  SubTitleDescrCar,
+  TitleDescrCar,
+} from "../RenderCard/RenderCard.styled";
 import { ItemModal, ItemWrap, ImageModal, ButtonModal } from "./Modal.styled";
 const Modal = ({ selectedCar }) => {
   const dispatch = useDispatch();
@@ -55,17 +59,17 @@ const Modal = ({ selectedCar }) => {
                 </svg>
               </ButtonModal>
               <ImageModal src={car.img} alt="car" />
-              <DescrRentCarTop>
+              <TitleDescrCar>
                 <p>
                   {car.make}, {car.year}
                 </p>
                 <p>{car.rentalPrice}</p>
-              </DescrRentCarTop>
-              <div>
+              </TitleDescrCar>
+              <SubTitleDescrCar>
                 <p>{car.address}</p>
                 <p>{car.rentalCompany}</p>
                 <p>{car.type}</p>
-              </div>
+              </SubTitleDescrCar>
               <Button type="submit">Rental car</Button>
             </ItemModal>
           ))}
